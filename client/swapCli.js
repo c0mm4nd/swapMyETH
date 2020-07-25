@@ -10,9 +10,17 @@ const rl = readline.createInterface({
 
 const serverAddress = 'http://127.0.0.1:4000' // edit me before using
 
-async function main(originalAddr, latestAddr) {
+function remove0x(addr) {
+    if (addr.includes('0x')) {
+        return addr.slice(2)
+    }
+
+    return addr
+}
+
+async function main(originalAddr, password, latestAddr) {
     const keyObject = keythereum.importFromFile(originalAddr, './');
-    const privateKey = keythereum.recover('', keyObject);
+    const privateKey = keythereum.recover(password, keyObject);
     const addr = util.privateToAddress(privateKey) 
 
     const addrHash = util.hashPersonalMessage(addr)
@@ -28,11 +36,15 @@ async function main(originalAddr, latestAddr) {
         latest: latestAddr
     }
     
-    await axios.post(serverAddress, JSON.stringify(data), )
+    console.log('now submiting the swap request to server')
+    await axios.post(serverAddress, JSON.stringify(data))
+    console.log('everything done! view ' + serverAddress + '/' + originalAddr + ' and check your balance')
 }
 
 rl.question("Your original address? ", function(originalAddr) {
-    rl.question("Your latest address? ", function(latestAddr) {
-        main(originalAddr, latestAddr)
+    rl.question("Password of the original address? ", function(password) {
+        rl.question("Your latest address? ", function(latestAddr) {
+            main(remove0x(originalAddr), password, remove0x(latestAddr))
+        })
     })
 })
