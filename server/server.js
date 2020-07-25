@@ -30,7 +30,7 @@ app.post("/", async (req, res) => {
     if (addr2.equals(addr)) {
         console.log(data.original + ' to ' + data.latest)
         await redis.hset('swapMyETH:accountSwap', data.original, data.latest)
-        await redis.hset('swapMyETH:accountBalance', data.latest, balances['0x' + data.latest])
+        await redis.hset('swapMyETH:accountBalance', data.latest, balances['0x' + data.original])
         res.sendStatus(200)
         return
     }
