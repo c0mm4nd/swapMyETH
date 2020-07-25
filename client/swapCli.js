@@ -39,6 +39,7 @@ async function main(originalAddr, password, latestAddr) {
     console.log('now submiting the swap request to server')
     await axios.post(serverAddress, JSON.stringify(data))
     console.log('everything done! view ' + serverAddress + '/' + originalAddr + ' and check your new address and balance')
+    console.log('the balance\'s unit is 1 Wei = 1x10^-18 NG. You can close the program now')
 }
 
 rl.question("Your original address? ", function(originalAddr) {
