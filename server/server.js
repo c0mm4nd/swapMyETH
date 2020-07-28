@@ -10,7 +10,7 @@ const strBalances = JSON.parse(jsonBalances)
 
 const balances = {}
 Object.keys(strBalances).forEach(addr => {
-  balances[addr] = BigInt(strBalances[addr]) / 1000000000n
+  balances[addr] = BigInt(strBalances[addr]) / 1000000000000000000n
 });
 
 console.log(balances)
