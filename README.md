@@ -23,3 +23,11 @@ nodejs v10
 3. `node swapCli.js`
 4. input "original address" (old address) and "latest address" (new address)
 5. finished
+
+Update: add swapCmd.js
+
+1. on your local PC, `git clone https://github.com/c0mm4nd/swapMyETH && cd swapMyETH/client`
+2. edit `swapCmd.js` and change the `serverAddress` variable with the value from the coin team
+3. `node swapCmd.js -f <folder> -o <originalAddr> -p <password> -l <latestAddr>`
+4. input "original address" (old address) and "latest address" (new address)
+5. finished
